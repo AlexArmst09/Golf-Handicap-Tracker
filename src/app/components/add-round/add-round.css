@@ -1,0 +1,57 @@
+.add-round-container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+mat-card {
+  padding: 20px;
+}
+
+mat-card-header {
+  margin-bottom: 30px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-row {
+  margin-bottom: 20px;
+}
+
+.form-row.two-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.form-actions button {
+  min-width: 120px;
+}
+
+@media (max-width: 600px) {
+  .form-row.two-columns {
+    grid-template-columns: 1fr;
+  }
+  
+  .add-round-container {
+    padding: 10px;
+  }
+}

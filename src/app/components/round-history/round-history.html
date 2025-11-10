@@ -1,0 +1,85 @@
+<div class="history-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Round History</mat-card-title>
+      <mat-card-subtitle>All your recorded golf rounds</mat-card-subtitle>
+      <div class="header-actions">
+        <button mat-raised-button color="warn" (click)="clearAllRounds()" *ngIf="rounds.length > 0">
+          <mat-icon>delete_forever</mat-icon>
+          Clear All
+        </button>
+      </div>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div *ngIf="rounds.length === 0" class="no-data">
+        <mat-icon>golf_course</mat-icon>
+        <h3>No rounds recorded yet</h3>
+        <p>Start tracking your golf rounds to calculate your handicap!</p>
+      </div>
+
+      <div *ngIf="rounds.length > 0" class="table-container">
+        <table mat-table [dataSource]="rounds" class="rounds-table">
+          <!-- Date Column -->
+          <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef>Date</th>
+            <td mat-cell *matCellDef="let round">{{ formatDate(round.date) }}</td>
+          </ng-container>
+
+          <!-- Course Name Column -->
+          <ng-container matColumnDef="courseName">
+            <th mat-header-cell *matHeaderCellDef>Course</th>
+            <td mat-cell *matCellDef="let round">
+              <div class="course-info">
+                <span class="course-name">{{ round.courseName }}</span>
+                <span class="tee-info" *ngIf="round.teeColor">{{ round.teeColor }} Tees</span>
+              </div>
+            </td>
+          </ng-container>
+
+          <!-- Score Column -->
+          <ng-container matColumnDef="score">
+            <th mat-header-cell *matHeaderCellDef>Score</th>
+            <td mat-cell *matCellDef="let round">
+              <span class="score">{{ round.score }}</span>
+              <span class="holes-info">({{ round.numberOfHoles }})</span>
+            </td>
+          </ng-container>
+
+          <!-- Course Rating Column -->
+          <ng-container matColumnDef="courseRating">
+            <th mat-header-cell *matHeaderCellDef>Rating</th>
+            <td mat-cell *matCellDef="let round">{{ round.courseRating }}</td>
+          </ng-container>
+
+          <!-- Slope Rating Column -->
+          <ng-container matColumnDef="slopeRating">
+            <th mat-header-cell *matHeaderCellDef>Slope</th>
+            <td mat-cell *matCellDef="let round">{{ round.slopeRating }}</td>
+          </ng-container>
+
+          <!-- Differential Column -->
+          <ng-container matColumnDef="differential">
+            <th mat-header-cell *matHeaderCellDef>Differential</th>
+            <td mat-cell *matCellDef="let round">
+              <span class="differential">{{ getDifferential(round) }}</span>
+            </td>
+          </ng-container>
+
+          <!-- Actions Column -->
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>Actions</th>
+            <td mat-cell *matCellDef="let round">
+              <button mat-icon-button color="warn" (click)="deleteRound(round)" matTooltip="Delete round">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="round-row"></tr>
+        </table>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

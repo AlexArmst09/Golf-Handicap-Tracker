@@ -1,0 +1,119 @@
+<div class="add-round-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Add New Golf Round</mat-card-title>
+      <mat-card-subtitle>Enter the details of your golf round</mat-card-subtitle>
+    </mat-card-header>
+    
+    <mat-card-content>
+      <form [formGroup]="roundForm" (ngSubmit)="onSubmit()">
+        <div class="form-row">
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Date</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="date" required>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="roundForm.get('date')?.hasError('required')">
+              Date is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Course Name</mat-label>
+            <input matInput formControlName="courseName" placeholder="e.g., Pebble Beach" required>
+            <mat-error *ngIf="roundForm.get('courseName')?.hasError('required')">
+              Course name is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="form-row two-columns">
+          <mat-form-field appearance="fill">
+            <mat-label>Course Rating</mat-label>
+            <input matInput type="number" step="0.1" formControlName="courseRating" required>
+            <mat-hint>Usually between 67-75</mat-hint>
+            <mat-error *ngIf="roundForm.get('courseRating')?.hasError('required')">
+              Course rating is required
+            </mat-error>
+            <mat-error *ngIf="roundForm.get('courseRating')?.hasError('min') || roundForm.get('courseRating')?.hasError('max')">
+              Must be between 50 and 90
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Slope Rating</mat-label>
+            <input matInput type="number" formControlName="slopeRating" required>
+            <mat-hint>Usually between 100-140</mat-hint>
+            <mat-error *ngIf="roundForm.get('slopeRating')?.hasError('required')">
+              Slope rating is required
+            </mat-error>
+            <mat-error *ngIf="roundForm.get('slopeRating')?.hasError('min') || roundForm.get('slopeRating')?.hasError('max')">
+              Must be between 55 and 155
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="form-row two-columns">
+          <mat-form-field appearance="fill">
+            <mat-label>Your Score</mat-label>
+            <input matInput type="number" formControlName="score" required>
+            <mat-error *ngIf="roundForm.get('score')?.hasError('required')">
+              Score is required
+            </mat-error>
+            <mat-error *ngIf="roundForm.get('score')?.hasError('min') || roundForm.get('score')?.hasError('max')">
+              Must be between 40 and 150
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Number of Holes</mat-label>
+            <mat-select formControlName="numberOfHoles" required>
+              <mat-option [value]="9">9 Holes</mat-option>
+              <mat-option [value]="18">18 Holes</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="form-row two-columns">
+          <mat-form-field appearance="fill">
+            <mat-label>Tee Color</mat-label>
+            <mat-select formControlName="teeColor">
+              <mat-option *ngFor="let color of teeColors" [value]="color">
+                {{ color }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Weather</mat-label>
+            <mat-select formControlName="weather">
+              <mat-option value="">Not specified</mat-option>
+              <mat-option *ngFor="let weather of weatherOptions" [value]="weather">
+                {{ weather }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Notes (Optional)</mat-label>
+            <textarea matInput formControlName="notes" rows="3" 
+                      placeholder="Any notes about this round..."></textarea>
+          </mat-form-field>
+        </div>
+
+        <div class="form-actions">
+          <button mat-raised-button type="button" (click)="onCancel()">
+            Cancel
+          </button>
+          <button mat-raised-button color="primary" type="submit" [disabled]="!roundForm.valid">
+            Save Round
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

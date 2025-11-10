@@ -1,0 +1,20 @@
+<mat-toolbar color="primary">
+  <span class="logo">⛳ Golf Handicap Tracker</span>
+  <span class="spacer"></span>
+  <button mat-button routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+    <mat-icon>home</mat-icon>
+    Home
+  </button>
+  <button mat-button routerLink="/add-round" routerLinkActive="active">
+    <mat-icon>add_circle</mat-icon>
+    Add Round
+  </button>
+  <button mat-button routerLink="/history" routerLinkActive="active">
+    <mat-icon>history</mat-icon>
+    History
+  </button>
+  <button mat-button routerLink="/stats" routerLinkActive="active">
+    <mat-icon>analytics</mat-icon>
+    Stats
+  </button>
+</mat-toolbar>

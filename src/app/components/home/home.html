@@ -1,0 +1,95 @@
+<div class="home-container">
+  <div class="welcome-section">
+    <h1>Welcome to Your Golf Handicap Tracker</h1>
+    <p>Track your rounds, monitor your progress, and calculate your official handicap index.</p>
+  </div>
+
+  <div class="cards-container">
+    <!-- Handicap Card -->
+    <mat-card class="handicap-card">
+      <mat-card-header>
+        <mat-icon class="card-icon">emoji_events</mat-icon>
+        <mat-card-title>Your Handicap Index</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="handicap-display">
+          <span class="handicap-value" *ngIf="handicapIndex">{{ handicapIndex.value }}</span>
+          <span class="handicap-value no-data" *ngIf="!handicapIndex">--</span>
+        </div>
+        <p class="handicap-info" *ngIf="handicapIndex">
+          Based on {{ handicapIndex.roundsUsed }} best of {{ totalRounds }} rounds
+        </p>
+        <p class="handicap-info" *ngIf="!handicapIndex && totalRounds > 0">
+          Need {{ 3 - totalRounds }} more rounds to calculate handicap
+        </p>
+        <p class="handicap-info" *ngIf="totalRounds === 0">
+          No rounds recorded yet. Add your first round to get started!
+        </p>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Total Rounds Card -->
+    <mat-card class="stat-card">
+      <mat-card-header>
+        <mat-icon class="card-icon">golf_course</mat-icon>
+        <mat-card-title>Total Rounds</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="stat-display">
+          <span class="stat-value">{{ totalRounds }}</span>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" routerLink="/add-round">
+          <mat-icon>add</mat-icon>
+          Add Round
+        </button>
+      </mat-card-actions>
+    </mat-card>
+
+    <!-- Recent Activity Card -->
+    <mat-card class="recent-rounds-card">
+      <mat-card-header>
+        <mat-icon class="card-icon">history</mat-icon>
+        <mat-card-title>Recent Rounds</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div *ngIf="recentRounds.length === 0" class="no-data">
+          <p>No rounds recorded yet.</p>
+        </div>
+        <div *ngIf="recentRounds.length > 0" class="rounds-list">
+          <div class="round-item" *ngFor="let round of recentRounds">
+            <div class="round-info">
+              <span class="round-course">{{ round.courseName }}</span>
+              <span class="round-date">{{ formatDate(round.date) }}</span>
+            </div>
+            <span class="round-score">{{ round.score }}</span>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-actions *ngIf="recentRounds.length > 0">
+        <button mat-button color="primary" routerLink="/history">
+          View All Rounds
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <div class="quick-actions">
+    <h2>Quick Actions</h2>
+    <div class="action-buttons">
+      <button mat-raised-button color="primary" routerLink="/add-round">
+        <mat-icon>add_circle</mat-icon>
+        Add New Round
+      </button>
+      <button mat-raised-button color="accent" routerLink="/stats">
+        <mat-icon>analytics</mat-icon>
+        View Statistics
+      </button>
+      <button mat-raised-button routerLink="/history">
+        <mat-icon>list</mat-icon>
+        View History
+      </button>
+    </div>
+  </div>
+</div>

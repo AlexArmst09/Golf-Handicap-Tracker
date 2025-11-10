@@ -1,0 +1,145 @@
+<div class="stats-container">
+  <h1>Your Golf Statistics</h1>
+
+  <div *ngIf="!stats || stats.totalRounds === 0" class="no-data">
+    <mat-icon>bar_chart</mat-icon>
+    <h3>No statistics available yet</h3>
+    <p>Add some rounds to see your stats!</p>
+  </div>
+
+  <div *ngIf="stats && stats.totalRounds > 0" class="stats-grid">
+    <!-- Handicap Index Card -->
+    <mat-card class="stat-card highlight-card">
+      <mat-card-header>
+        <mat-icon class="card-icon">emoji_events</mat-icon>
+        <mat-card-title>Handicap Index</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="stat-value large">{{ handicapValue !== null ? handicapValue : '--' }}</div>
+        <div class="stat-label">Current Index</div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Total Rounds Card -->
+    <mat-card class="stat-card">
+      <mat-card-header>
+        <mat-icon class="card-icon">golf_course</mat-icon>
+        <mat-card-title>Total Rounds</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="stat-value">{{ stats.totalRounds }}</div>
+        <div class="stat-label">Rounds Played</div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Average Score Card -->
+    <mat-card class="stat-card">
+      <mat-card-header>
+        <mat-icon class="card-icon">calculate</mat-icon>
+        <mat-card-title>Average Score</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="stat-value">{{ stats.averageScore }}</div>
+        <div class="stat-label">Per Round</div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Best Score Card -->
+    <mat-card class="stat-card">
+      <mat-card-header>
+        <mat-icon class="card-icon">star</mat-icon>
+        <mat-card-title>Best Score</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="stat-value success">{{ stats.bestScore }}</div>
+        <div class="stat-label">Personal Best</div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Worst Score Card -->
+    <mat-card class="stat-card">
+      <mat-card-header>
+        <mat-icon class="card-icon">sentiment_dissatisfied</mat-icon>
+        <mat-card-title>Highest Score</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="stat-value">{{ stats.worstScore }}</div>
+        <div class="stat-label">Room to Improve</div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Score Range Card -->
+    <mat-card class="stat-card">
+      <mat-card-header>
+        <mat-icon class="card-icon">show_chart</mat-icon>
+        <mat-card-title>Score Range</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="stat-value">{{ stats.worstScore - stats.bestScore }}</div>
+        <div class="stat-label">Stroke Difference</div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Average Differential Card -->
+    <mat-card class="stat-card">
+      <mat-card-header>
+        <mat-icon class="card-icon">functions</mat-icon>
+        <mat-card-title>Avg Differential</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="stat-value">{{ stats.averageDifferential }}</div>
+        <div class="stat-label">All Rounds</div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Best Differential Card -->
+    <mat-card class="stat-card">
+      <mat-card-header>
+        <mat-icon class="card-icon">workspace_premium</mat-icon>
+        <mat-card-title>Best Differential</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="stat-value success">{{ stats.bestDifferential }}</div>
+        <div class="stat-label">Lowest Differential</div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Trend Card -->
+    <mat-card class="stat-card">
+      <mat-card-header>
+        <mat-icon class="card-icon">timeline</mat-icon>
+        <mat-card-title>Recent Trend</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="trend-content">
+          <mat-icon [class]="getTrendColor()">{{ getTrendIcon() }}</mat-icon>
+          <div class="stat-value small" [class]="getTrendColor()">{{ getTrendText() }}</div>
+        </div>
+        <div class="stat-label">Last 5 Rounds</div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Monthly Performance -->
+  <div *ngIf="stats && getScoresByMonth().length > 0" class="monthly-section">
+    <mat-card>
+      <mat-card-header>
+        <mat-icon class="card-icon">calendar_month</mat-icon>
+        <mat-card-title>Monthly Performance</mat-card-title>
+        <mat-card-subtitle>Average scores by month</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="monthly-chart">
+          <div class="month-bar" *ngFor="let month of getScoresByMonth()">
+            <div class="month-label">{{ month.month }}</div>
+            <div class="bar-container">
+              <div class="bar" [style.height.%]="(month.avgScore / 120) * 100"></div>
+            </div>
+            <div class="score-label">{{ month.avgScore }}</div>
+            <div class="rounds-label">{{ month.rounds }} rounds</div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
