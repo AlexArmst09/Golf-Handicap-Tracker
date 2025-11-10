@@ -1,59 +1,45 @@
-# GolfHandicapTracker
+# Golf Handicap Tracker
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.6.
+Easily track and calculate your golf handicap with this lightweight and user-friendly Angular app. Great for golfers who want a quick way to log rounds, monitor progress, and view stats over time.
 
-## Development server
+## Features
 
-To start a local development server, run:
+* Add, edit, and delete golf scores
+* Automatically calculates your handicap
+* Simple and clean interface
+* Stores data locally or via backend if connected
 
-```bash
-ng serve
-```
+## Tech Stack
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+* **Frontend**: Angular CLI: 20.3.9
+* **Language:** TypeScript, HTML, CSS
+* **Styling:** CSS
+* **Build & Package Management:** Node.js, npm
 
-## Code scaffolding
+## How to Run
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+1. Clone the repository:
 
-```bash
-ng generate component component-name
-```
+   ```bash
+   git clone https://github.com/AlexArmst09/Golf-Handicap-Tracker.git
+   ```
+2. Navigate into the project folder:
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+   ```bash
+   cd Golf-Handicap-Tracker
+   ```
+3. Install dependencies:
 
-```bash
-ng generate --help
-```
+   ```bash
+   npm install
+   ```
+4. Run the app:
 
-## Building
+   ```bash
+   npm start
+   ```
+5. Open your browser at `http://localhost:4200` to use the app
 
-To build the project run:
 
-```bash
-ng build
-```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+If you want, I can also **make it look extra polished** with badges for Angular, Node.js, GitHub, and NPM — that makes the README visually stand out. Do you want me to do that?
