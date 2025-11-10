@@ -39,7 +39,3 @@ Easily track and calculate your golf handicap with this lightweight and user-fri
    npm start
    ```
 5. Open your browser at `http://localhost:4200` to use the app
-
-
-
-If you want, I can also **make it look extra polished** with badges for Angular, Node.js, GitHub, and NPM — that makes the README visually stand out. Do you want me to do that?
